@@ -33,4 +33,8 @@ public class Enemy : ScriptableObject
     public float coneRadius;
     [Range(0, 360)]
     public float coneAngle;
+    public GameObject bulletPrefab;
+    public float shootCooldown;
+    public float detectionTime;
+    public float maxDetectionTime;
 }

@@ -14,7 +14,7 @@ public class EnemyContoller : MonoBehaviour
     public Transform[] waypoints;
 
     EnemyType type;
-    EnemyState state;
+    public EnemyState state;
 
     int destPoint = 0;
     float shootCooldown = 0f;
@@ -24,7 +24,8 @@ public class EnemyContoller : MonoBehaviour
     float distractedTime = 0f;
 
     Transform lastPlayerPosition = null;
-    Transform startTransform;
+    Vector3 startPosition;
+    Quaternion startRotation;
 
     // Perception Cone
     float radius;
@@ -46,7 +47,8 @@ public class EnemyContoller : MonoBehaviour
         angle = enemyData.coneAngle;
 
         state = EnemyState.IDLE;
-        startTransform = transform;
+        startPosition = transform.position;
+        startRotation = transform.rotation;
 
         if (waypoints.Length != 0)
         {
@@ -69,10 +71,10 @@ public class EnemyContoller : MonoBehaviour
                 {
                     agent.isStopped = true;
 
-                    if (detectionTimer <= 2)
+                    if (detectionTimer <= enemyData.maxDetectionTime)
                         detectionTimer += Time.deltaTime;
 
-                    if (detectionTimer > 1)
+                    if (detectionTimer > enemyData.detectionTime)
                     {
                         state = EnemyState.SHOOTING;
                         Shoot();
@@ -104,7 +106,7 @@ public class EnemyContoller : MonoBehaviour
 
                                 state = EnemyState.IDLE;
                                 agent.speed = enemyData.agentSpeed;
-                                transform.SetPositionAndRotation(startTransform.position, startTransform.rotation);
+                                transform.SetPositionAndRotation(startPosition, startRotation);
                             }
                             break;
                         case EnemyState.SEARCHING:
@@ -121,12 +123,12 @@ public class EnemyContoller : MonoBehaviour
                                 }
                                 else
                                 {
-                                    agent.SetDestination(startTransform.position);
+                                    agent.SetDestination(startPosition);
                                     agent.speed = enemyData.agentSpeed;
                                     if (Vector3.Distance(transform.position, agent.destination) <= 2)
                                     {
                                         state = EnemyState.IDLE;
-                                        transform.SetPositionAndRotation(startTransform.position, startTransform.rotation);
+                                        transform.SetPositionAndRotation(startPosition, startRotation);
                                     }
                                 }
                             }
@@ -150,7 +152,7 @@ public class EnemyContoller : MonoBehaviour
                                 else
                                 {
                                     state = EnemyState.IDLE;
-                                    transform.SetPositionAndRotation(startTransform.position, startTransform.rotation);
+                                    transform.SetPositionAndRotation(startPosition, startRotation);
                                 }
                             }
                             break;
@@ -159,6 +161,9 @@ public class EnemyContoller : MonoBehaviour
                     if (detectionTimer > 0)
                         detectionTimer -= Time.deltaTime;
                 }
+
+                if (shootCooldown > 0)
+                    shootCooldown -= Time.deltaTime;
             }
             else
             {
@@ -213,15 +218,13 @@ public class EnemyContoller : MonoBehaviour
 
     void Shoot()
     {
-        if (shootCooldown > 0)
+        if (shootCooldown <= 0)
         {
-            shootCooldown -= Time.deltaTime;
+            GameObject bullet = Instantiate(enemyData.bulletPrefab, transform.position, transform.rotation);
+            Vector3 shootDir = (lastPlayerPosition.position - transform.position).normalized;
+            bullet.GetComponent<EnemyBullet>().SetUp(shootDir);
 
-            if (shootCooldown <= 0)
-            {
-                // TODO SHOOT BULLET
-                shootCooldown = 4.0f;
-            }
+            shootCooldown = enemyData.shootCooldown;
         }
     }
 

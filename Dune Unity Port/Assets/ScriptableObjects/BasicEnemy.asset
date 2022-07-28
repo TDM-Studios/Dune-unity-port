@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: BasicEnemy
   type: 0
-  enemyPrefab: {fileID: 4322734441824797115, guid: dc9ff99dac51cc245bba5ac46c530973,
-    type: 3}
+  enemyMesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
   agentSpeed: 2
   agentSpeedRun: 3
   coneRadius: 7
   coneAngle: 63
+  bulletPrefab: {fileID: 2297330321156627532, guid: 8760f984681caf847a5b941c0df28cc8,
+    type: 3}
+  shootCooldown: 4
+  detectionTime: 3
+  maxDetectionTime: 6
