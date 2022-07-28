@@ -13,6 +13,8 @@ public class EnemyContoller : MonoBehaviour
     public Animator animator;
     public Transform[] waypoints;
 
+    public Transform shootPoint;
+
     EnemyType type;
     public EnemyState state;
 
@@ -77,6 +79,7 @@ public class EnemyContoller : MonoBehaviour
                     if (detectionTimer > enemyData.detectionTime)
                     {
                         state = EnemyState.SHOOTING;
+                        distractedTime = 0f;
                         Shoot();
                         agent.speed = enemyData.agentSpeedRun;
                     }
@@ -96,13 +99,13 @@ public class EnemyContoller : MonoBehaviour
                             else
                             {
                                 state = EnemyState.CAUTIOUS;
-                                LookAtPos(lastPlayerPosition);
+                                LookAtPos(lastPlayerPosition.position);
                             }
                             break;
                         case EnemyState.CAUTIOUS:
-                            if (detectionTimer <= 0)
+                            if (detectionTimer <= 0f)
                             {
-                                detectionTimer = 0;
+                                detectionTimer = 0f;
 
                                 state = EnemyState.IDLE;
                                 agent.speed = enemyData.agentSpeed;
@@ -111,11 +114,11 @@ public class EnemyContoller : MonoBehaviour
                             break;
                         case EnemyState.SEARCHING:
 
-                            if (detectionTimer <= 0)
+                            if (detectionTimer <= 0f)
                             {
-                                detectionTimer = 0;
+                                detectionTimer = 0f;
 
-                                if (waypoints.Length != 0)
+                                if (waypoints.Length != 0f)
                                 {
                                     state = EnemyState.PATROLING;
                                     agent.speed = enemyData.agentSpeed;
@@ -139,11 +142,11 @@ public class EnemyContoller : MonoBehaviour
                         case EnemyState.DISTRACTED:
                             distractedTime -= Time.deltaTime;
 
-                            if (distractedTime <= 0)
+                            if (distractedTime <= 0f)
                             {
-                                distractedTime = 0;
+                                distractedTime = 0f;
 
-                                if (waypoints.Length != 0)
+                                if (waypoints.Length != 0f)
                                 {
                                     state = EnemyState.PATROLING;
                                     agent.speed = enemyData.agentSpeed;
@@ -158,11 +161,11 @@ public class EnemyContoller : MonoBehaviour
                             break;
                     }
 
-                    if (detectionTimer > 0)
+                    if (detectionTimer > 0f)
                         detectionTimer -= Time.deltaTime;
                 }
 
-                if (shootCooldown > 0)
+                if (shootCooldown > 0f)
                     shootCooldown -= Time.deltaTime;
             }
             else
@@ -171,11 +174,11 @@ public class EnemyContoller : MonoBehaviour
                 {
                     stunnedTime -= Time.deltaTime;
 
-                    if (stunnedTime <= 0)
+                    if (stunnedTime <= 0f)
                     {
-                        stunnedTime = 0;
+                        stunnedTime = 0f;
 
-                        if (waypoints.Length != 0)
+                        if (waypoints.Length != 0f)
                         {
                             state = EnemyState.PATROLING;
                             agent.speed = enemyData.agentSpeed;
@@ -203,7 +206,7 @@ public class EnemyContoller : MonoBehaviour
     {
         if (agent.hasPath)
         {
-            if (Vector3.Distance(transform.position, agent.destination) <= 2)
+            if (Vector3.Distance(transform.position, agent.destination) <= 2f)
                 GoNextPatrolPoint();
         }
         else
@@ -220,7 +223,7 @@ public class EnemyContoller : MonoBehaviour
     {
         if (shootCooldown <= 0)
         {
-            GameObject bullet = Instantiate(enemyData.bulletPrefab, transform.position, transform.rotation);
+            GameObject bullet = Instantiate(enemyData.bulletPrefab, shootPoint.position, shootPoint.rotation);
             Vector3 shootDir = (lastPlayerPosition.position - transform.position).normalized;
             bullet.GetComponent<EnemyBullet>().SetUp(shootDir);
 
@@ -265,9 +268,10 @@ public class EnemyContoller : MonoBehaviour
             canSeePlayer = false;
     }
 
-    void LookAtPos(Transform playerPos)
+    void LookAtPos(Vector3 distractPos)
     {
-        // TODO CHANGE ROTATION TO POSITION
+        Vector3 distractDir = (distractPos - transform.position).normalized;
+        transform.forward = distractDir;
     }
 
     void Stun(float time)
@@ -280,6 +284,6 @@ public class EnemyContoller : MonoBehaviour
     {
         state = EnemyState.DISTRACTED;
         distractedTime = time;
-        LookAtPos(playerPos);
+        LookAtPos(playerPos.position);
     }
 }

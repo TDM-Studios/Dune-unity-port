@@ -24,4 +24,9 @@ public class EnemyBullet : MonoBehaviour
     {
         this.shootDir = dir;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Destroy(gameObject);
+    }
 }
