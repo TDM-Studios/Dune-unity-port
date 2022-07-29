@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 116914854}
   - component: {fileID: 116914853}
   - component: {fileID: 116914852}
+  - component: {fileID: 116914856}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Untagged
@@ -220,6 +221,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &116914856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116914851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c05ec58865b3ff4cab891f98652ea92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityList: []
 --- !u!1 &479005104
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,6 +330,7 @@ GameObject:
   - component: {fileID: 718131033}
   - component: {fileID: 718131032}
   - component: {fileID: 718131031}
+  - component: {fileID: 718131035}
   m_Layer: 0
   m_Name: Player 3
   m_TagString: Untagged
@@ -401,6 +416,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &718131035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718131030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c05ec58865b3ff4cab891f98652ea92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityList: []
 --- !u!1 &952419601
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,7 +553,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1175684846}
-  - component: {fileID: 1175684847}
   m_Layer: 0
   m_Name: AbilitySystem
   m_TagString: Untagged
@@ -548,37 +575,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1175684847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1175684845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c05ec58865b3ff4cab891f98652ea92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abilityList:
-  - name: Knife Throw
-    owner: {fileID: 116914851}
-    type: 1
-    body: {fileID: 0}
-    keyBind: 0
-    charges: 1
-    cooldown: 7
-    counter: 0
-    onCooldown: 0
-  - name: Backstab
-    owner: {fileID: 116914851}
-    type: 2
-    body: {fileID: 0}
-    keyBind: 1
-    charges: -1
-    cooldown: 2
-    counter: 0
-    onCooldown: 0
 --- !u!1 &1584482790
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,6 +587,7 @@ GameObject:
   - component: {fileID: 1584482793}
   - component: {fileID: 1584482792}
   - component: {fileID: 1584482791}
+  - component: {fileID: 1584482795}
   m_Layer: 0
   m_Name: Player 2
   m_TagString: Untagged
@@ -676,3 +673,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1584482795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584482790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c05ec58865b3ff4cab891f98652ea92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityList: []

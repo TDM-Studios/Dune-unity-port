@@ -23,6 +23,7 @@ public enum Key
 public class Ability 
 {
     public string name;
+    [HideInInspector]
     public GameObject owner;
     public AbilityType type;
     public GameObject body;

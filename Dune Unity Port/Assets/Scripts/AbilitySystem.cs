@@ -5,6 +5,15 @@ using UnityEngine;
 public class AbilitySystem : MonoBehaviour
 {
     public Ability[] abilityList;
+
+    private void Awake()
+    {
+        foreach(Ability a in abilityList)
+        {
+            a.owner = this.gameObject;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
