@@ -5,16 +5,21 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     public Transform player;
+    public Rigidbody rb;
     public float height = 10f;
     public float distance = 20f;
     public float angle = 45f;
     public float rotationSpeed = 0.5f;
     public float smoothSpeed = 0.5f;
+    Vector3 movement;
 
     private Vector3 refVelocity;
+    public Camera camera;
+    public float moveSpeed = 5f;
     private void Start()
     {
-        HandleCamera();
+        rb = this.GetComponent<Rigidbody>();
+        MoveCamera();
     }
 
     // Update is called once per frame
@@ -24,27 +29,38 @@ public class CameraMovement : MonoBehaviour
             angle += rotationSpeed;
         if (Input.GetButton("RotateCameraE"))
             angle -= rotationSpeed;
-        if (Input.GetButton("Mouse ScrollWheel"))
+        if (Input.GetButton("ZoomIn"))
         {
-            distance += 1;
-            height += 1;
+            camera.fieldOfView--;
         }
-        HandleCamera();
+        if (Input.GetButton("ZoomOut"))
+        {
+            camera.fieldOfView++;
+        }
+        MoveCamera();
     }
-    protected virtual void HandleCamera()
+    private void FixedUpdate()
     {
-        if (!player)
-            return;
-        Vector3 worldPosition = (Vector3.forward * -distance) + (Vector3.up * height);
+        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+    }
+    protected virtual void MoveCamera()
+    {
+        //if (!player)
+        //    return;
+        //Vector3 worldPosition = (Vector3.forward * -distance) + (Vector3.up * height);
 
-        Vector3 rotatedVector = Quaternion.AngleAxis(angle, Vector3.up) * worldPosition;
+        //Vector3 rotatedVector = Quaternion.AngleAxis(angle, Vector3.up) * worldPosition;
 
-        Vector3 flatTargetPos = player.position;
-        flatTargetPos.y = 0f;
-        Vector3 finalPos = flatTargetPos + rotatedVector;
+        //Vector3 flatTargetPos = player.position;
+        //flatTargetPos.y = 0f;
+        //Vector3 finalPos = flatTargetPos + rotatedVector;
 
-        transform.position = Vector3.SmoothDamp(transform.position,finalPos, ref refVelocity,smoothSpeed);
-        transform.LookAt(flatTargetPos);
+        //transform.position = Vector3.SmoothDamp(transform.position,finalPos, ref refVelocity,smoothSpeed);
+        //transform.LookAt(flatTargetPos);
 
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.z = Input.GetAxisRaw("Vertical");
+        movement.Normalize();
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
     }
 }
