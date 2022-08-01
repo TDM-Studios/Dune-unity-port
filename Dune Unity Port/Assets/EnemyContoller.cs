@@ -37,7 +37,6 @@ public class EnemyContoller : MonoBehaviour
     public bool canSeePlayer;
     public GameObject playerRefs;
 
-
     // Start is called before the first frame update
     void Start()
     {
