@@ -18,6 +18,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+
+        transform.position = new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             health -= 5;
