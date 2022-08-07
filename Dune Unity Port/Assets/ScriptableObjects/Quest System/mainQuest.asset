@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: mainQuest
   m_EditorClassIdentifier: 
   information:
-    name: 
-    description: 
+    name: "Misi\xF3n Principal"
+    description: "\xC1brete paso a trav\xE9s del ca\xF1\xF3n: Encu\xE9ntrate con
+      Chani al final del ca\xF1\xF3n."
   isMainQuest: 0
   goals: []
