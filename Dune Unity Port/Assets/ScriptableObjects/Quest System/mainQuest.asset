@@ -17,4 +17,21 @@ MonoBehaviour:
     description: "\xC1brete paso a trav\xE9s del ca\xF1\xF3n: Encu\xE9ntrate con
       Chani al final del ca\xF1\xF3n."
   isMainQuest: 0
-  goals: []
+  goals:
+  - {fileID: 5541064887336263610}
+--- !u!114 &5541064887336263610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3e80ed0b33e9be4a97da4ee3d9664a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requiredAmount: 2
+  goalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
