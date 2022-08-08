@@ -1,6 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
+// THIS SCRIPT IS ONLY FOR TESTING
+// THIS SCRIPT IS ONLY FOR TESTING
+// THIS SCRIPT IS ONLY FOR TESTING
+// THIS SCRIPT IS ONLY FOR TESTING
+// THIS SCRIPT IS ONLY FOR TESTING
+// THIS SCRIPT IS ONLY FOR TESTING
+// THIS SCRIPT IS ONLY FOR TESTING
+// THIS SCRIPT IS ONLY FOR TESTING
+// THIS SCRIPT IS ONLY FOR TESTING
+// THIS SCRIPT IS ONLY FOR TESTING
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,15 +30,21 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        float x = -Input.GetAxis("Horizontal");
+        float z = -Input.GetAxis("Vertical");
 
         transform.position = new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            health -= 5;
+            health -= 50;
             Debug.Log("Health: " + health);
+        }
+
+        // Loads the latest saved checkpoint
+        if (health <= 0.0f)
+        {
+            LoadPlayer();
         }
 
         if (Input.GetKeyDown(KeyCode.P))
@@ -62,6 +80,21 @@ public class PlayerController : MonoBehaviour
         rot.z = data.rotation[2];
         rot.w = data.rotation[3];
         transform.rotation = rot;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Win"))
+        {
+            SavePlayer();
+            //SceneManager.LoadScene("Level2");
+            Debug.Log("WIIIN");
+            return;
+        }
+        else if (other.CompareTag("Checkpoint"))
+        {
+            SavePlayer();
+        }
     }
 
 }

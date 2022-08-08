@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5531715167607656856}
   - component: {fileID: 5531715167607656859}
-  - component: {fileID: 5531715167607656858}
   m_Layer: 0
   m_Name: Checkpoint
   m_TagString: Checkpoint
@@ -25,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5531715167607656857}
-  m_LocalRotation: {x: -0, y: 0.462407, z: -0, w: 0.8866678}
+  m_LocalRotation: {x: 0, y: 0.4624064, z: 0, w: 0.8866681}
   m_LocalPosition: {x: 60.51, y: 0, z: 111.01}
   m_LocalScale: {x: 6.9397, y: 6.9397, z: 6.9397}
   m_ConstrainProportionsScale: 0
@@ -46,16 +45,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.332023, y: 0.3357597, z: 0.47903937}
   m_Center: {x: -0.116904, y: 0.12248066, z: 0.5585443}
---- !u!114 &5531715167607656858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5531715167607656857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1336e563f673484e8bd1cd7e549877f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
