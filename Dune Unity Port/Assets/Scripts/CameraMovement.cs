@@ -6,8 +6,6 @@ public class CameraMovement : MonoBehaviour
 {
     public Transform player;
     private CharacterController controller;
-    public float height = 10f;
-    public float distance = 20f;
     public float angle = 45f;
     public float rotationSpeed = 0.5f;
     RaycastHit hit;
