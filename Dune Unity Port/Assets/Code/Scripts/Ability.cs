@@ -11,14 +11,6 @@ public enum AbilityType
     CONTROLLABLE
 }
 
-public enum Key
- {
-    Q,
-    W,
-    E,
-    R
- }
-
 [System.Serializable]
 public class Ability 
 {
@@ -26,10 +18,10 @@ public class Ability
     [HideInInspector]
     public GameObject owner;
     public AbilityType type;
-    public GameObject body;
-    public Key keyBind;
+    public GameObject prefab;
     //-1 for no charges!
     public int charges;
+    public int range;
     public float cooldown;
     [HideInInspector]
     public float counter;
