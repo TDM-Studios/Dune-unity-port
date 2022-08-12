@@ -193,12 +193,12 @@ public class EnemyContoller : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        
+
     }
 
     void Patrol()
@@ -284,5 +284,16 @@ public class EnemyContoller : MonoBehaviour
         state = EnemyState.DISTRACTED;
         distractedTime = time;
         LookAtPos(playerPos.position);
+    }
+
+    void Death()
+    {
+        destPoint = 0;
+        shootCooldown = 0f;
+        detectionTimer = 0f;
+        stunnedTime = 0f;
+        distractedTime = 0f;
+
+        state = EnemyState.DEATH;
     }
 }

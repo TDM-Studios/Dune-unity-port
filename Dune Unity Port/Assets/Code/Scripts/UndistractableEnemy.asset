@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d3bf9e9fee570c42933aeef9e1a1fef, type: 3}
-  m_Name: BasicEnemy
+  m_Name: UndistractableEnemy
   m_EditorClassIdentifier: 
-  enemyName: BasicEnemy
-  type: 0
+  enemyName: UndistractableEnemy
+  type: 2
   enemyMesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
   agentSpeed: 6
   agentSpeedRun: 7.2
