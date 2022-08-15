@@ -85,7 +85,7 @@ public class AbilitySystem : MonoBehaviour
     private void ShowAbilityRange(Ability selected)
     {
         // Mostrar el rango como se hacía en el juego base.
-        if(selected.type == AbilityType.PROJECTILE_TO_GROUND || selected.type == AbilityType.PROJECTILE_TO_TARGET || selected.type == AbilityType.AREA_OF_EFFECT)
+        if(selected.type == AbilityType.PROJECTILE_TO_GROUND || selected.type == AbilityType.PROJECTILE_TO_TARGET_ENEMY || selected.type == AbilityType.PROJECTILE_TO_TARGET_ALLY || selected.type == AbilityType.AREA_OF_EFFECT)
         {
             // Mostrar un área (League of Legends like).
         }
@@ -100,26 +100,84 @@ public class AbilitySystem : MonoBehaviour
     private void AbilityCast(Ability selected)
     {
         GameObject abilityPrefab;
+
+        Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
         // Pillamos la info necesaria para poder enviarsela a la invocación de la habilidad.
         switch(selected.type)
         {
-            case AbilityType.PROJECTILE_TO_TARGET:
-                // Raycast to target (Enemy/Ally tag). Storage at a variable.
-                // Take in account the animations! (if(animation.HasFinished()))
-                // abilityPrefab = GameObject.Instantiate(selected.prefab, selected.owner.transform.position, Quaternion.identity);
-                PutAbilityOnCooldown(selected);
+            case AbilityType.PROJECTILE_TO_TARGET_ENEMY:
+                // Raycast to target (Enemy tag). Storage at a variable.
+                if(Physics.Raycast(r, out hit, 1000f))
+                {
+                    if(hit.transform.gameObject.CompareTag("Enemy"))
+                    {
+                        Debug.Log(hit.transform.gameObject.name + " " + hit.transform.gameObject.tag);
+                        // Take in account the animations! (if(animation.HasFinished()))
+                        // abilityPrefab = GameObject.Instantiate(selected.prefab, selected.owner.transform.position, Quaternion.identity);
+                        PutAbilityOnCooldown(selected);
+                        Debug.Log("Casted Ability " + selected.name + "!");
+                    }
+                    else
+                    {
+                        AbilityCancel();
+                    }
+                }
+                break;
+            case AbilityType.PROJECTILE_TO_TARGET_ALLY:
+                // Raycast to target (Ally tag). Storage at a variable.
+                if(Physics.Raycast(r, out hit, 1000f))
+                {
+                    if(hit.transform.gameObject.CompareTag("Ally"))
+                    {
+                        Debug.Log(hit.transform.gameObject.name + " " + hit.transform.gameObject.tag);
+                        // Take in account the animations! (if(animation.HasFinished()))
+                        // abilityPrefab = GameObject.Instantiate(selected.prefab, selected.owner.transform.position, Quaternion.identity);
+                        PutAbilityOnCooldown(selected);
+                        Debug.Log("Casted Ability " + selected.name + "!");
+                    }
+                    else
+                    {
+                        AbilityCancel();
+                    }
+                }
                 break;
             case AbilityType.MELEE_TO_TARGET:
-                // Raycast to target (Enemy/Ally tag). Displace the player to the target. When arriving, cast the ability.
-                // Take in account the animations! (if(animation.HasFinished()))
-                // abilityPrefab = GameObject.Instantiate(selected.prefab, selected.owner.transform.position, Quaternion.identity);
-                PutAbilityOnCooldown(selected);
+                // Raycast to target (Enemy tag). Storage at a variable.
+                if(Physics.Raycast(r, out hit, 1000f))
+                {
+                    if(hit.transform.gameObject.CompareTag("Enemy"))
+                    {
+                        Debug.Log(hit.transform.gameObject.name + " " + hit.transform.gameObject.tag);
+                        // Take in account the animations! (if(animation.HasFinished()))
+                        // abilityPrefab = GameObject.Instantiate(selected.prefab, selected.owner.transform.position, Quaternion.identity);
+                        PutAbilityOnCooldown(selected);
+                        Debug.Log("Casted Ability " + selected.name + "!");
+                    }
+                    else
+                    {
+                        AbilityCancel();
+                    }
+                }
                 break;
             case AbilityType.PROJECTILE_TO_GROUND:
-                // Raycast to target (Ground tag). Also storage the position where the ray collided. Storage at 2 variables.
-                // Take in account the animations! (if(animation.HasFinished()))
-                // abilityPrefab = GameObject.Instantiate(selected.prefab, selected.owner.transform.position, Quaternion.identity);
-                PutAbilityOnCooldown(selected);
+                // Raycast to target (Ground tag). Storage at a variable.
+                if(Physics.Raycast(r, out hit, 1000f))
+                {
+                    if(hit.transform.gameObject.CompareTag("Ground"))
+                    {
+                        Debug.Log(hit.transform.gameObject.name + " " + hit.transform.gameObject.tag + " " + hit.transform.position);
+                        // Take in account the animations! (if(animation.HasFinished()))
+                        // abilityPrefab = GameObject.Instantiate(selected.prefab, selected.owner.transform.position, Quaternion.identity);
+                        PutAbilityOnCooldown(selected);
+                        Debug.Log("Casted Ability " + selected.name + "!");
+                    }
+                    else
+                    {
+                        AbilityCancel();
+                    }
+                }
                 break;
             default:
                 // Take in account the animations! (if(animation.HasFinished()))
@@ -127,8 +185,6 @@ public class AbilitySystem : MonoBehaviour
                 PutAbilityOnCooldown(selected);
                 break;
         }
-
-        Debug.Log("Casted Ability " + selected.name + "!");
     }
 
     private void AbilityCancel()
