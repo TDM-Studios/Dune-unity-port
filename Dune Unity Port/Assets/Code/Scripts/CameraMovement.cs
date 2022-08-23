@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
+    private Camera cam;
     public Transform player;
     private CharacterController controller;
     public float angle = 45f;
@@ -12,30 +13,35 @@ public class CameraMovement : MonoBehaviour
     public float smoothSpeed = 0.5f;
     Vector3 movement;
 
+    //Zoom
+    private float targetZoom;
+    [SerializeField] private float zoomFactor = 3f;
+    private float zoomLerpSpeed = 10;
+
+
     public float moveSpeed = 5f;
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        cam = Camera.main;
+        targetZoom = cam.fieldOfView;
         MoveCamera();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("ZoomIn"))
-        {
-            float frustumHeight = transform.localScale.y;
-            float distance = (float)(frustumHeight * 0.5 / Mathf.Tan((float)(Camera.main.fieldOfView * 0.5 * Mathf.Deg2Rad)));
-
-            // Since front side of the block is not at pivot
-            distance += (float)(transform.localScale.z * 0.5);
-            Camera.main.transform.position = Vector3.back * distance;
-        }
-        if (Input.GetButton("ZoomOut"))
-        {
-            Camera.main.fieldOfView -= Time.deltaTime * 50;
-        }
+        Zoom();
         MoveCamera();
+    }
+    public void Zoom()
+    {
+        float scrollData;
+        scrollData = Input.GetAxis("Mouse ScrollWheel");
+
+        targetZoom -= scrollData * zoomFactor;
+        targetZoom = Mathf.Clamp(targetZoom, 15f, 80f);
+        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, targetZoom, Time.deltaTime * zoomLerpSpeed);
     }
     
     protected virtual void MoveCamera()
