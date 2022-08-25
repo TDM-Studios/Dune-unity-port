@@ -6,6 +6,9 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
+    [SerializeField]
+    private List<string> names;
+
     [SerializeField] private Sprite[] imageAutor;
 
     [SerializeField] private GameObject dialogueBox;
@@ -45,6 +48,11 @@ public class DialogueManager : MonoBehaviour
     public void SetOnlyAutor(string autor)
     {
         dialogueAutor.GetComponent<TMP_Text>().text = autor;
+    }
+
+    public void SetOnlyIDAutor(int autor)
+    {
+        dialogueAutor.GetComponent<TMP_Text>().text = names[autor];
     }
     public void TextOn()
     {

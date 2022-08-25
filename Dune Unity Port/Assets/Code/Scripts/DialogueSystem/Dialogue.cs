@@ -4,12 +4,16 @@ using UnityEngine;
 using System;
 using TMPro;
 
+
+
 public enum Autor
 {
     Paul,
     Chani,
     Stilgar
 }
+
+
 
 [Serializable]
 public class Line
@@ -25,7 +29,6 @@ public class Line
 
 public class Dialogue : MonoBehaviour
 {
-
     private bool active;
     private int line;
     public float waitTime = 0.05f;
@@ -100,7 +103,11 @@ public class Dialogue : MonoBehaviour
     private IEnumerator ShowLine()
     {
         dialogueManager.SetText(string.Empty,string.Empty);
-        dialogueManager.SetOnlyAutor(speech[line].Name());
+        //dialogueManager.SetOnlyAutor(speech[line].Name());
+
+        dialogueManager.SetOnlyIDAutor(speech[line].IDImage());
+
+
         dialogueManager.SetImage(speech[line].IDImage());
 
 
