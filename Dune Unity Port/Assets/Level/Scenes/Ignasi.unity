@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 25157117}
   - component: {fileID: 25157116}
   - component: {fileID: 25157115}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player 1
   m_TagString: Ally
   m_Icon: {fileID: 0}
@@ -160,10 +160,11 @@ MonoBehaviour:
   - name: Knife Throw
     owner: {fileID: 0}
     type: 1
-    prefab: {fileID: 0}
-    charges: -1
-    range: 20
-    cooldown: 10
+    prefab: {fileID: 3721256013873583723, guid: 6b488d5c4033af844af5e5dc26736d7c,
+      type: 3}
+    charges: 1
+    range: 30
+    cooldown: 0
     counter: 0
     onCooldown: 0
   - name: Heal
@@ -457,7 +458,7 @@ GameObject:
   - component: {fileID: 347029901}
   - component: {fileID: 347029900}
   - component: {fileID: 347029899}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player 3
   m_TagString: Ally
   m_Icon: {fileID: 0}
@@ -605,7 +606,7 @@ GameObject:
   - component: {fileID: 813672178}
   - component: {fileID: 813672177}
   - component: {fileID: 813672176}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player 2
   m_TagString: Ally
   m_Icon: {fileID: 0}
@@ -897,8 +898,8 @@ GameObject:
   - component: {fileID: 1735301609}
   - component: {fileID: 1735301608}
   - component: {fileID: 1735301607}
-  m_Layer: 0
-  m_Name: Ally
+  m_Layer: 9
+  m_Name: Enemy 2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -994,7 +995,7 @@ GameObject:
   - component: {fileID: 2088823161}
   - component: {fileID: 2088823160}
   - component: {fileID: 2088823159}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}

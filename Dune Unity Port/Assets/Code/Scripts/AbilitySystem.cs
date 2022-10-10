@@ -7,7 +7,7 @@ public class AbilitySystem : MonoBehaviour
     public bool isPlayerSelected = false;
     public Ability[] abilityList;
     private Ability selectedAbility;
-
+    public RaycastHit hit;
 
     private void Awake()
     {
@@ -109,7 +109,6 @@ public class AbilitySystem : MonoBehaviour
             GameObject abilityPrefab;
 
             Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
 
             // Pillamos la info necesaria para poder enviarsela a la invocación de la habilidad.
             switch(selected.type)
@@ -122,7 +121,7 @@ public class AbilitySystem : MonoBehaviour
                         {
                             Debug.Log(hit.transform.gameObject.name + " " + hit.transform.gameObject.tag);
                             // Take in account the animations! (if(animation.HasFinished()))
-                            // abilityPrefab = GameObject.Instantiate(selected.prefab, selected.owner.transform.position, Quaternion.identity);
+                            abilityPrefab = GameObject.Instantiate(selected.prefab, selected.owner.transform.position, Quaternion.identity);
                             PutAbilityOnCooldown(selected);
                             Debug.Log("Casted Ability " + selected.name + "!");
                         }
@@ -140,7 +139,7 @@ public class AbilitySystem : MonoBehaviour
                         {
                             Debug.Log(hit.transform.gameObject.name + " " + hit.transform.gameObject.tag);
                             // Take in account the animations! (if(animation.HasFinished()))
-                            // abilityPrefab = GameObject.Instantiate(selected.prefab, selected.owner.transform.position, Quaternion.identity);
+                            abilityPrefab = GameObject.Instantiate(selected.prefab, selected.owner.transform.position, Quaternion.identity);
                             PutAbilityOnCooldown(selected);
                             Debug.Log("Casted Ability " + selected.name + "!");
                         }
@@ -158,7 +157,7 @@ public class AbilitySystem : MonoBehaviour
                         {
                             Debug.Log(hit.transform.gameObject.name + " " + hit.transform.gameObject.tag);
                             // Take in account the animations! (if(animation.HasFinished()))
-                            // abilityPrefab = GameObject.Instantiate(selected.prefab, selected.owner.transform.position, Quaternion.identity);
+                            abilityPrefab = GameObject.Instantiate(selected.prefab, selected.owner.transform.position, Quaternion.identity);
                             PutAbilityOnCooldown(selected);
                             Debug.Log("Casted Ability " + selected.name + "!");
                         }
@@ -176,7 +175,7 @@ public class AbilitySystem : MonoBehaviour
                         {
                             Debug.Log(hit.transform.gameObject.name + " " + hit.transform.gameObject.tag + " " + hit.point);
                             // Take in account the animations! (if(animation.HasFinished()))
-                            // abilityPrefab = GameObject.Instantiate(selected.prefab, selected.owner.transform.position, Quaternion.identity);
+                            abilityPrefab = GameObject.Instantiate(selected.prefab, selected.owner.transform.position, Quaternion.identity);
                             PutAbilityOnCooldown(selected);
                             Debug.Log("Casted Ability " + selected.name + "!");
                         }
