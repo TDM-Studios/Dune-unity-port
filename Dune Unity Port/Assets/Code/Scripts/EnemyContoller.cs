@@ -12,6 +12,7 @@ public class EnemyContoller : MonoBehaviour
     public MeshFilter meshFilter;
     public Animator animator;
     public Transform[] waypoints;
+    public bool pendingToDelete;
 
     public Transform shootPoint;
 
