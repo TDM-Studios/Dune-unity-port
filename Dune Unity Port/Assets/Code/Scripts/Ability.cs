@@ -16,7 +16,6 @@ public enum AbilityType
 public class Ability 
 {
     public string name;
-    [HideInInspector]
     public GameObject owner;
     public AbilityType type;
     public GameObject prefab;
@@ -27,5 +26,4 @@ public class Ability
     [HideInInspector]
     public float counter;
     public bool onCooldown;
-    
 }
