@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 1577268335561909507}
   - component: {fileID: 1577268335561909504}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: BasicEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -204,6 +204,7 @@ MonoBehaviour:
   meshFilter: {fileID: 1577268335561909509}
   animator: {fileID: 0}
   waypoints: []
+  pendingToDelete: 0
   shootPoint: {fileID: 1577268336026473104}
   state: 0
   targetMask:

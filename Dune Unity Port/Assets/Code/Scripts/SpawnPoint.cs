@@ -5,5 +5,5 @@ using UnityEngine;
 public class SpawnPoint : MonoBehaviour
 {
     public EnemyType enemyType;
-    public GameObject[] waypoints;
+    public Transform[] waypoints;
 }

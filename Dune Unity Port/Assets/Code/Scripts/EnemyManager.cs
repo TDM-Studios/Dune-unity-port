@@ -18,13 +18,28 @@ public class EnemyManager : MonoBehaviour
             switch (spawnPoints[i].GetComponent<SpawnPoint>().enemyType)
             {
                 case EnemyType.BASIC:
-                    enemiesGO.Add(Instantiate(basicEnemy, spawnPoints[i].transform));
+                    enemiesGO.Add(Instantiate(basicEnemy, spawnPoints[i].transform.position, Quaternion.identity));
+                    if(spawnPoints[i].GetComponent<SpawnPoint>().waypoints.Length > 0)
+                    {
+                        Debug.Log("basic waypoints");
+                        enemiesGO[i].GetComponent<EnemyContoller>().waypoints = spawnPoints[i].GetComponent<SpawnPoint>().waypoints;
+                    }
                     break;
                 case EnemyType.TANK:
-                    enemiesGO.Add(Instantiate(tankEnemy, spawnPoints[i].transform));
+                    enemiesGO.Add(Instantiate(tankEnemy, spawnPoints[i].transform.position, Quaternion.identity));
+                    if(spawnPoints[i].GetComponent<SpawnPoint>().waypoints.Length > 0)
+                    {
+                        Debug.Log("tank waypoints");
+                        enemiesGO[i].GetComponent<EnemyContoller>().waypoints = spawnPoints[i].GetComponent<SpawnPoint>().waypoints;
+                    }
                     break;
                 case EnemyType.AIR:
-                    enemiesGO.Add(Instantiate(airEnemy, spawnPoints[i].transform));
+                    enemiesGO.Add(Instantiate(airEnemy, spawnPoints[i].transform.position, Quaternion.identity));
+                    if(spawnPoints[i].GetComponent<SpawnPoint>().waypoints.Length > 0)
+                    {
+                        Debug.Log("air waypoints");
+                        enemiesGO[i].GetComponent<EnemyContoller>().waypoints = spawnPoints[i].GetComponent<SpawnPoint>().waypoints;
+                    }                        
                     break;
                default:
                     break;
@@ -39,6 +54,9 @@ public class EnemyManager : MonoBehaviour
             if ((enemiesGO[i].GetComponent<EnemyContoller>().pendingToDelete))
             {
                 Debug.Log("SADADASDASDASDSADASDASDASD");
+                GameObject pendingToDelete = enemiesGO[i];
+                enemiesGO.Remove(enemiesGO[i]);
+                Destroy(pendingToDelete);
             }
         }
     }
