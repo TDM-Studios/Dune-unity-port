@@ -185,9 +185,14 @@ public class AbilitySystem : MonoBehaviour
                         }
                     }
                     break;
+                case AbilityType.AREA_OF_EFFECT:
+                    // Take in account the animations! (if(animation.HasFinished()))
+                    abilityPrefab = GameObject.Instantiate(selected.prefab, selected.owner.transform.position, Quaternion.identity);
+                    PutAbilityOnCooldown(selected);
+                    break;
                 default:
                     // Take in account the animations! (if(animation.HasFinished()))
-                    // abilityPrefab = GameObject.Instantiate(selected.prefab, selected.owner.transform.position, Quaternion.identity);
+                    abilityPrefab = GameObject.Instantiate(selected.prefab, selected.owner.transform.position, Quaternion.identity);
                     PutAbilityOnCooldown(selected);
                     break;
             }

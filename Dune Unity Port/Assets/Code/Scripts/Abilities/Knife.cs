@@ -25,9 +25,11 @@ public class Knife : MonoBehaviour
 
         this.transform.LookAt(destination.transform, Vector3.up);
 
-        Vector3 dir = (destination.transform.position - owner.transform.position).normalized;
+        Vector3 dir = (destination.transform.position - owner.transform.position);
+        dir.y += 0.5f;
+        dir = dir.normalized;
         
-        rb.velocity = dir * player1.abilityList[0].range;
+        rb.velocity = dir * player1.abilityList[1].range;
     }
 
     // Update is called once per frame

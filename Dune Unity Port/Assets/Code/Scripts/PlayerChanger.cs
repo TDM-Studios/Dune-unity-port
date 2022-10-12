@@ -6,7 +6,6 @@ public class PlayerChanger : MonoBehaviour
 {
     public AbilitySystem player1; 
     public AbilitySystem player2; 
-    public AbilitySystem player3; 
     
     // Start is called before the first frame update
     void Start()
@@ -21,22 +20,13 @@ public class PlayerChanger : MonoBehaviour
         {
             player1.isPlayerSelected = true;
             player2.isPlayerSelected = false;
-            player3.isPlayerSelected =  false;
-            Debug.Log(player1.isPlayerSelected.ToString() + " " + player2.isPlayerSelected.ToString() + " " + player3.isPlayerSelected.ToString());
+            Debug.Log(player1.isPlayerSelected.ToString() + " " + player2.isPlayerSelected.ToString());
         }
         if(Input.GetKeyDown(KeyCode.Alpha2))
         {
             player1.isPlayerSelected = false;
             player2.isPlayerSelected = true;
-            player3.isPlayerSelected =  false;
-            Debug.Log(player1.isPlayerSelected.ToString() + " " + player2.isPlayerSelected.ToString() + " " + player3.isPlayerSelected.ToString());
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            player1.isPlayerSelected = false;
-            player2.isPlayerSelected = false;
-            player3.isPlayerSelected =  true;
-            Debug.Log(player1.isPlayerSelected.ToString() + " " + player2.isPlayerSelected.ToString() + " " + player3.isPlayerSelected.ToString());
+            Debug.Log(player1.isPlayerSelected.ToString() + " " + player2.isPlayerSelected.ToString());
         }
     }
 }
