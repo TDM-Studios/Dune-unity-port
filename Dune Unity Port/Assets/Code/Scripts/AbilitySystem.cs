@@ -153,13 +153,16 @@ public class AbilitySystem : MonoBehaviour
                     // Raycast to target (Enemy tag). Storage at a variable.
                     if(Physics.Raycast(r, out hit, 1000f))
                     {
-                        if(hit.transform.gameObject.CompareTag("Enemy"))
+                        if((selected.owner.transform.position - hit.transform.position).magnitude < 2f)
                         {
-                            Debug.Log(hit.transform.gameObject.name + " " + hit.transform.gameObject.tag);
-                            // Take in account the animations! (if(animation.HasFinished()))
-                            abilityPrefab = GameObject.Instantiate(selected.prefab, selected.owner.transform.position, Quaternion.identity);
-                            PutAbilityOnCooldown(selected);
-                            Debug.Log("Casted Ability " + selected.name + "!");
+                            if(hit.transform.gameObject.CompareTag("Enemy"))
+                            {
+                                Debug.Log(hit.transform.gameObject.name + " " + hit.transform.gameObject.tag);
+                                // Take in account the animations! (if(animation.HasFinished()))
+                                abilityPrefab = GameObject.Instantiate(selected.prefab, selected.owner.transform.position, Quaternion.identity);
+                                PutAbilityOnCooldown(selected);
+                                Debug.Log("Casted Ability " + selected.name + "!");
+                            }
                         }
                         else
                         {
