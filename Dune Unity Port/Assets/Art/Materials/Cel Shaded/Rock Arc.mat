@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CS3 Texture
-  m_Shader: {fileID: -6465566751694194690, guid: 40b3e151765e65c4c85121281d45d75d,
+  m_Name: Rock Arc
+  m_Shader: {fileID: -6465566751694194690, guid: 711291f66706ce24a95d382f2e9b6093,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -126,9 +126,9 @@ Material:
     - _Fresnel_Color: {r: 1, g: 1, b: 1, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Specular_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _csp: {r: 0.1, g: 0.3, b: 0.6, a: 1}
+    - _csp: {r: 0.3, g: 0.5, b: 0.75, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &1451891355602670810
+--- !u!114 &47620133609745329
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

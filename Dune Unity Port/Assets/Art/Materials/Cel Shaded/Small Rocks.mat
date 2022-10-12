@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CS3
-  m_Shader: {fileID: -6465566751694194690, guid: 40b3e151765e65c4c85121281d45d75d,
+  m_Name: Small Rocks
+  m_Shader: {fileID: -6465566751694194690, guid: 711291f66706ce24a95d382f2e9b6093,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -42,7 +42,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Diffuse_Texture:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 7db417f7918c321418ae37c0825a53ec, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -121,14 +121,14 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Diffuse_Color: {r: 1, g: 0, b: 0, a: 0}
+    - _Diffuse_Color: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Fresnel_Color: {r: 0, g: 0.27142906, b: 1, a: 0}
+    - _Fresnel_Color: {r: 1, g: 1, b: 1, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Specular_Color: {r: 0.97436184, g: 1, b: 0.6367924, a: 0}
-    - _csp: {r: 0.1, g: 0.3, b: 0.6, a: 1}
+    - _Specular_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _csp: {r: 0.3, g: 0.5, b: 0.75, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &1451891355602670810
+--- !u!114 &7896396382770111222
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
