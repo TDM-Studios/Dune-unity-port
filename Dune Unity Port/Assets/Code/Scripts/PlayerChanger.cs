@@ -29,4 +29,21 @@ public class PlayerChanger : MonoBehaviour
             Debug.Log(player1.isPlayerSelected.ToString() + " " + player2.isPlayerSelected.ToString());
         }
     }
+    public void SetPlayer(int id)
+    {
+        player1.isPlayerSelected = false;
+        player2.isPlayerSelected = false;
+        switch (id)
+        {
+            case 0:
+                player1.isPlayerSelected = true;
+                break;
+            case 1:
+                player2.isPlayerSelected = true;
+                break;
+            default:
+                break;
+        }        
+        Debug.Log(player1.isPlayerSelected.ToString() + " " + player2.isPlayerSelected.ToString());
+    }
 }
