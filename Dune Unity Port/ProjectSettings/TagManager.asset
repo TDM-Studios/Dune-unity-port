@@ -4,6 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Ally
+  - Enemy
+  - Ground
   - Checkpoint
   - Win
   layers:
@@ -15,9 +18,9 @@ TagManager:
   - UI
   - Perception
   - Obstruction
-  - 
-  - 
-  - 
+  - Players
+  - Enemies
+  - Abilities
   - 
   - 
   - 

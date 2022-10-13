@@ -24,6 +24,7 @@ public class EnemyContoller : MonoBehaviour
     float detectionTimer = 0f;
     float stunnedTime = 0f;
     float distractedTime = 0f;
+    public bool controlled = false;
 
     Transform lastPlayerPosition = null;
     Vector3 startPosition;
@@ -67,127 +68,134 @@ public class EnemyContoller : MonoBehaviour
     {
         if (state != EnemyState.DEATH)
         {
-            if (state != EnemyState.STUNNED)
+            if (!controlled)
             {
-                if (canSeePlayer)
+                if (state != EnemyState.STUNNED)
                 {
-                    agent.isStopped = true;
-
-                    if (detectionTimer <= enemyData.maxDetectionTime)
-                        detectionTimer += Time.deltaTime;
-
-                    if (detectionTimer > enemyData.detectionTime)
+                    if (canSeePlayer)
                     {
-                        state = EnemyState.SHOOTING;
-                        distractedTime = 0f;
-                        Shoot();
-                        agent.speed = enemyData.agentSpeedRun;
+                        agent.isStopped = true;
+
+                        if (detectionTimer <= enemyData.maxDetectionTime)
+                            detectionTimer += Time.deltaTime;
+
+                        if (detectionTimer > enemyData.detectionTime)
+                        {
+                            state = EnemyState.SHOOTING;
+                            distractedTime = 0f;
+                            Shoot();
+                            agent.speed = enemyData.agentSpeedRun;
+                        }
                     }
-                }
-                else
-                {
-                    agent.isStopped = false;
-
-                    switch (state)
+                    else
                     {
-                        case EnemyState.SHOOTING:
-                            if (type != EnemyType.UNDISTRACTABLE)
-                            {
-                                state = EnemyState.SEARCHING;
-                                agent.SetDestination(lastPlayerPosition.position);
-                            }
-                            else
-                            {
-                                state = EnemyState.CAUTIOUS;
-                                LookAtPos(lastPlayerPosition.position);
-                            }
-                            break;
-                        case EnemyState.CAUTIOUS:
-                            if (detectionTimer <= 0f)
-                            {
-                                detectionTimer = 0f;
+                        agent.isStopped = false;
 
-                                state = EnemyState.IDLE;
-                                agent.speed = enemyData.agentSpeed;
-                                transform.SetPositionAndRotation(startPosition, startRotation);
-                            }
-                            break;
-                        case EnemyState.SEARCHING:
-
-                            if (detectionTimer <= 0f)
-                            {
-                                detectionTimer = 0f;
-
-                                if (waypoints.Length != 0f)
+                        switch (state)
+                        {
+                            case EnemyState.SHOOTING:
+                                if (type != EnemyType.UNDISTRACTABLE)
                                 {
-                                    state = EnemyState.PATROLING;
-                                    agent.speed = enemyData.agentSpeed;
-                                    agent.SetDestination(waypoints[destPoint].position);
+                                    state = EnemyState.SEARCHING;
+                                    agent.SetDestination(lastPlayerPosition.position);
                                 }
                                 else
                                 {
-                                    agent.SetDestination(startPosition);
+                                    state = EnemyState.CAUTIOUS;
+                                    LookAtPos(lastPlayerPosition.position);
+                                }
+                                break;
+                            case EnemyState.CAUTIOUS:
+                                if (detectionTimer <= 0f)
+                                {
+                                    detectionTimer = 0f;
+
+                                    state = EnemyState.IDLE;
                                     agent.speed = enemyData.agentSpeed;
-                                    if (Vector3.Distance(transform.position, agent.destination) <= 2)
+                                    transform.SetPositionAndRotation(startPosition, startRotation);
+                                }
+                                break;
+                            case EnemyState.SEARCHING:
+
+                                if (detectionTimer <= 0f)
+                                {
+                                    detectionTimer = 0f;
+
+                                    if (waypoints.Length != 0f)
+                                    {
+                                        state = EnemyState.PATROLING;
+                                        agent.speed = enemyData.agentSpeed;
+                                        agent.SetDestination(waypoints[destPoint].position);
+                                    }
+                                    else
+                                    {
+                                        agent.SetDestination(startPosition);
+                                        agent.speed = enemyData.agentSpeed;
+                                        if (Vector3.Distance(transform.position, agent.destination) <= 2)
+                                        {
+                                            state = EnemyState.IDLE;
+                                            transform.SetPositionAndRotation(startPosition, startRotation);
+                                        }
+                                    }
+                                }
+                                break;
+                            case EnemyState.PATROLING:
+                                Patrol();
+                                break;
+                            case EnemyState.DISTRACTED:
+                                distractedTime -= Time.deltaTime;
+
+                                if (distractedTime <= 0f)
+                                {
+                                    distractedTime = 0f;
+
+                                    if (waypoints.Length != 0f)
+                                    {
+                                        state = EnemyState.PATROLING;
+                                        agent.speed = enemyData.agentSpeed;
+                                        agent.SetDestination(waypoints[destPoint].position);
+                                    }
+                                    else
                                     {
                                         state = EnemyState.IDLE;
                                         transform.SetPositionAndRotation(startPosition, startRotation);
                                     }
                                 }
-                            }
-                            break;
-                        case EnemyState.PATROLING:
-                            Patrol();
-                            break;
-                        case EnemyState.DISTRACTED:
-                            distractedTime -= Time.deltaTime;
+                                break;
+                        }
 
-                            if (distractedTime <= 0f)
-                            {
-                                distractedTime = 0f;
-
-                                if (waypoints.Length != 0f)
-                                {
-                                    state = EnemyState.PATROLING;
-                                    agent.speed = enemyData.agentSpeed;
-                                    agent.SetDestination(waypoints[destPoint].position);
-                                }
-                                else
-                                {
-                                    state = EnemyState.IDLE;
-                                    transform.SetPositionAndRotation(startPosition, startRotation);
-                                }
-                            }
-                            break;
+                        if (detectionTimer > 0f)
+                            detectionTimer -= Time.deltaTime;
                     }
 
-                    if (detectionTimer > 0f)
-                        detectionTimer -= Time.deltaTime;
+                    if (shootCooldown > 0f)
+                        shootCooldown -= Time.deltaTime;
                 }
+                else
+                {
+                    if (state == EnemyState.STUNNED)
+                    {
+                        stunnedTime -= Time.deltaTime;
 
-                if (shootCooldown > 0f)
-                    shootCooldown -= Time.deltaTime;
+                        if (stunnedTime <= 0f)
+                        {
+                            stunnedTime = 0f;
+
+                            if (waypoints.Length != 0f)
+                            {
+                                state = EnemyState.PATROLING;
+                                agent.speed = enemyData.agentSpeed;
+                                agent.SetDestination(waypoints[destPoint].position);
+                            }
+                            else
+                                state = EnemyState.IDLE;
+                        }
+                    }
+                }
             }
             else
             {
-                if (state == EnemyState.STUNNED)
-                {
-                    stunnedTime -= Time.deltaTime;
-
-                    if (stunnedTime <= 0f)
-                    {
-                        stunnedTime = 0f;
-
-                        if (waypoints.Length != 0f)
-                        {
-                            state = EnemyState.PATROLING;
-                            agent.speed = enemyData.agentSpeed;
-                            agent.SetDestination(waypoints[destPoint].position);
-                        }
-                        else
-                            state = EnemyState.IDLE;
-                    }
-                }
+                Debug.Log("Controlled");
             }
         }
     }
