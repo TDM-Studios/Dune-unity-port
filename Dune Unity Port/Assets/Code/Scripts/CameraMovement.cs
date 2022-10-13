@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    public Transform player;
+    //public Transform player;
     public Rigidbody rb;
     public float height = 10f;
     public float distance = 20f;

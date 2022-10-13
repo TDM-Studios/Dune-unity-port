@@ -5,6 +5,7 @@ using UnityEngine;
 public class AbilitySystem : MonoBehaviour
 {
     public bool isPlayerSelected = false;
+    public bool isPlayerCasting = false;
     public Ability[] abilityList;
     private Ability selectedAbility;
     public RaycastHit hit;
@@ -75,13 +76,29 @@ public class AbilitySystem : MonoBehaviour
     }
 
     private Ability PlayerInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            if(Input.GetKeyDown(KeyCode.Q)) return abilityList[0];
-            if(Input.GetKeyDown(KeyCode.W)) return abilityList[1];
-            if(Input.GetKeyDown(KeyCode.E)) return abilityList[2];
-            if(Input.GetKeyDown(KeyCode.R)) return abilityList[3];
-            return null;
+            isPlayerCasting = true;
+            return abilityList[0];
         }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            isPlayerCasting = true; 
+            return abilityList[1];
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            isPlayerCasting = true;
+            return abilityList[2];
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            isPlayerCasting = true;
+            return abilityList[3];
+        }
+        return null;
+    }
 
         private bool AbilityReadyCheck(Ability selected)
         {
@@ -199,11 +216,14 @@ public class AbilitySystem : MonoBehaviour
                     PutAbilityOnCooldown(selected);
                     break;
             }
+
+            isPlayerCasting = false;
         }
 
     private void AbilityCancel()
     {
         selectedAbility = null;
+        isPlayerCasting = false;
     }
 
     private void PutAbilityOnCooldown(Ability selected)

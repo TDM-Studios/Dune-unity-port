@@ -210,7 +210,7 @@ MonoBehaviour:
   controlled: 0
   targetMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 320
   obstructionMask:
     serializedVersion: 2
     m_Bits: 128

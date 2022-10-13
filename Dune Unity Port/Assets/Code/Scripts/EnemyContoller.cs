@@ -59,7 +59,7 @@ public class EnemyContoller : MonoBehaviour
             GoNextPatrolPoint();
         }
 
-        playerRefs = GameObject.FindGameObjectWithTag("Player");
+        playerRefs = GameObject.FindGameObjectWithTag("Ally");
         StartCoroutine(PerceptionConeRoutine());
     }
 
