@@ -16,9 +16,14 @@ public class CameraMovement : MonoBehaviour
     private Vector3 refVelocity;
     public Camera camera;
     public float moveSpeed = 5f;
+    float fov = Camera.main.fieldOfView;
+    public float minFov = 15f;
+    public float maxFov = 90f;
+    public float sensitivity = 10;
     private void Start()
     {
         rb = this.GetComponent<Rigidbody>();
+        camera = Camera.main;
         MoveCamera();
     }
 
@@ -29,14 +34,7 @@ public class CameraMovement : MonoBehaviour
             angle += rotationSpeed;
         if (Input.GetButton("RotateCameraE"))
             angle -= rotationSpeed;
-        if (Input.GetButton("ZoomIn"))
-        {
-            camera.fieldOfView--;
-        }
-        if (Input.GetButton("ZoomOut"))
-        {
-            camera.fieldOfView++;
-        }
+        
         MoveCamera();
     }
     private void FixedUpdate()
@@ -62,5 +60,9 @@ public class CameraMovement : MonoBehaviour
         movement.z = Input.GetAxisRaw("Vertical");
         movement.Normalize();
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
+
+        fov -= Input.GetAxis("Mouse ScrollWheel") * sensitivity;
+        fov = Mathf.Clamp(fov, minFov, maxFov);
+        Camera.main.fieldOfView = fov;
     }
 }

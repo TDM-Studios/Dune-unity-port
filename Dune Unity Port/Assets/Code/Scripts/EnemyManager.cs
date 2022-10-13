@@ -53,7 +53,6 @@ public class EnemyManager : MonoBehaviour
         {
             if ((enemiesGO[i].GetComponent<EnemyContoller>().pendingToDelete))
             {
-                Debug.Log("SADADASDASDASDSADASDASDASD");
                 GameObject pendingToDelete = enemiesGO[i];
                 enemiesGO.Remove(enemiesGO[i]);
                 Destroy(pendingToDelete);

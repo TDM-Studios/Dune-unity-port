@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: BasicEnemy
   type: 0
-  enemyMesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  enemyMesh: {fileID: -6992970836000103535, guid: d762baff44ed28543b2b4631e9dbb70b,
+    type: 3}
   agentSpeed: 6
   agentSpeedRun: 7.2
   coneRadius: 12

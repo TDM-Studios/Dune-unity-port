@@ -77,22 +77,22 @@ public class AbilitySystem : MonoBehaviour
 
     private Ability PlayerInput()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             isPlayerCasting = true;
             return abilityList[0];
         }
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.S))
         {
             isPlayerCasting = true; 
             return abilityList[1];
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.D))
         {
             isPlayerCasting = true;
             return abilityList[2];
         }
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             isPlayerCasting = true;
             return abilityList[3];
@@ -103,6 +103,7 @@ public class AbilitySystem : MonoBehaviour
         private bool AbilityReadyCheck(Ability selected)
         {
             if(selected.charges != 0 && !selected.onCooldown) return true;
+            isPlayerCasting = false;
             return false;
         }
 
