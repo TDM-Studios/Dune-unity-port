@@ -4,62 +4,63 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    private Camera cam;
     public Transform player;
-    private CharacterController controller;
+    public Rigidbody rb;
+    public float height = 10f;
+    public float distance = 20f;
     public float angle = 45f;
     public float rotationSpeed = 0.5f;
-    RaycastHit hit;
     public float smoothSpeed = 0.5f;
     Vector3 movement;
 
-    //Zoom
-    private float targetZoom;
-    [SerializeField] private float zoomFactor = 3f;
-    private float zoomLerpSpeed = 10;
-
-
+    private Vector3 refVelocity;
+    public Camera camera;
     public float moveSpeed = 5f;
     private void Start()
     {
-        controller = GetComponent<CharacterController>();
-        cam = Camera.main;
-        targetZoom = cam.fieldOfView;
+        rb = this.GetComponent<Rigidbody>();
         MoveCamera();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Zoom();
+        if (Input.GetButton("RotateCameraQ"))
+            angle += rotationSpeed;
+        if (Input.GetButton("RotateCameraE"))
+            angle -= rotationSpeed;
+        if (Input.GetButton("ZoomIn"))
+        {
+            camera.fieldOfView--;
+        }
+        if (Input.GetButton("ZoomOut"))
+        {
+            camera.fieldOfView++;
+        }
         MoveCamera();
     }
-    public void Zoom()
+    private void FixedUpdate()
     {
-        float scrollData;
-        scrollData = Input.GetAxis("Mouse ScrollWheel");
-
-        targetZoom -= scrollData * zoomFactor;
-        targetZoom = Mathf.Clamp(targetZoom, 15f, 80f);
-        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, targetZoom, Time.deltaTime * zoomLerpSpeed);
+        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
-    
     protected virtual void MoveCamera()
     {
-        Vector3 fwd = new Vector3(transform.forward.x, 0, transform.forward.z);
-        Vector3 move = transform.right * movement.x + fwd * movement.z;
-        controller.Move(move * Time.fixedDeltaTime * moveSpeed);
+        //if (!player)
+        //    return;
+        //Vector3 worldPosition = (Vector3.forward * -distance) + (Vector3.up * height);
+
+        //Vector3 rotatedVector = Quaternion.AngleAxis(angle, Vector3.up) * worldPosition;
+
+        //Vector3 flatTargetPos = player.position;
+        //flatTargetPos.y = 0f;
+        //Vector3 finalPos = flatTargetPos + rotatedVector;
+
+        //transform.position = Vector3.SmoothDamp(transform.position,finalPos, ref refVelocity,smoothSpeed);
+        //transform.LookAt(flatTargetPos);
 
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.z = Input.GetAxisRaw("Vertical");
         movement.Normalize();
-        if(Physics.Raycast(transform.position, transform.forward,out hit, 1000f))
-        {
-            if (Input.GetButton("RotateCameraQ"))
-                transform.RotateAround(hit.point, angle * Vector3.up, angle);
-            if (Input.GetButton("RotateCameraE"))
-                transform.RotateAround(hit.point, -angle * Vector3.up, angle);
-        }
-        //transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
     }
 }
