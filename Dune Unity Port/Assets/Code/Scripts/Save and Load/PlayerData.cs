@@ -13,7 +13,7 @@ public class PlayerData
     // TODO: Save habilities
 
 
-    public PlayerData(PlayerController player)
+    public PlayerData(PlayerControllerTESTING player)
     {
         health = player.health;
         maxHealth = player.maxHealth;

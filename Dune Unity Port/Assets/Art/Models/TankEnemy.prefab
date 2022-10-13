@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 910869061563630949}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 8009732591037113911}
   - component: {fileID: 8352627012701303746}
   - component: {fileID: 4335658215611400385}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FOV
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,9 +130,9 @@ GameObject:
   - component: {fileID: 7755196630374386044}
   - component: {fileID: 8447021873778614306}
   - component: {fileID: 4682919579775921537}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TankEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -238,6 +238,7 @@ MonoBehaviour:
   pendingToDelete: 0
   shootPoint: {fileID: 910869061563630949}
   state: 0
+  controlled: 0
   targetMask:
     serializedVersion: 2
     m_Bits: 64

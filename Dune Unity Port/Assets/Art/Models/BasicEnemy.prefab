@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1577268335452266118}
   - component: {fileID: 1577268335452266120}
   - component: {fileID: 1577268335452266121}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FOV
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,9 +99,9 @@ GameObject:
   - component: {fileID: 1577268335561909505}
   - component: {fileID: 1577268335561909507}
   - component: {fileID: 1577268335561909504}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BasicEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -207,6 +207,7 @@ MonoBehaviour:
   pendingToDelete: 0
   shootPoint: {fileID: 1577268336026473104}
   state: 0
+  controlled: 0
   targetMask:
     serializedVersion: 2
     m_Bits: 64
@@ -279,7 +280,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1577268336026473104}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

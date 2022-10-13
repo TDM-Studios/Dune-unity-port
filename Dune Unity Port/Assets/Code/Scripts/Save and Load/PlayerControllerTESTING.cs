@@ -14,7 +14,7 @@ using UnityEngine.SceneManagement;
 // THIS SCRIPT IS ONLY FOR TESTING
 // THIS SCRIPT IS ONLY FOR TESTING
 
-public class PlayerController : MonoBehaviour
+public class PlayerControllerTESTING : MonoBehaviour
 {
     public int health = 100;
     public int maxHealth = 100;

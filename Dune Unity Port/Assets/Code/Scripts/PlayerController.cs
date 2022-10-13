@@ -7,7 +7,10 @@ public class PlayerController : MonoBehaviour
 {
     public Camera cam;
     public NavMeshAgent player;
-    public GameObject targetDest;
+    private void Start()
+    {
+        cam = Camera.main;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -20,7 +23,6 @@ public class PlayerController : MonoBehaviour
             if(Physics.Raycast(ray, out hitPoint))
             {
                 Debug.Log("Pito 2");
-                targetDest.transform.position = hitPoint.point;
                 player.SetDestination(hitPoint.point);
             }
         }
